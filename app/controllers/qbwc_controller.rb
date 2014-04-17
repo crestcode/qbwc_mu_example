@@ -12,7 +12,7 @@ class QbwcController < ApplicationController
     <UserName>#{QBWC.username}</UserName>
     <OwnerID>#{QBWC.owner_id}</OwnerID>
     <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1EB}</FileID>
-    <QBType>QBFS</QBType>
+    <QBType>QBPOS</QBType>
     <Style>Document</Style>
     <Scheduler>
       <RunEveryNMinutes>5</RunEveryNMinutes>
@@ -23,8 +23,11 @@ class QbwcController < ApplicationController
   end
 
   def api
-    # respond successfully to a GET which some versions of the Web Connector send to verify the url
 
+    # increase entity_expansion_text_limit during web connector sessions for large (25+ items) pulls
+    REXML::Document.entity_expansion_text_limit = 5_000_000
+
+    # respond successfully to a GET which some versions of the Web Connector send to verify the url
     if request.get?
       render :nothing => true
       return
