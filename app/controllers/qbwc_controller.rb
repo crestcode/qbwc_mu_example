@@ -4,12 +4,12 @@ class QbwcController < ApplicationController
   def qwc
     qwc = <<-QWC
     <QBWCXML>
-    <AppName>#{Rails.application.class.parent_name} #{Rails.env}</AppName>
-    <AppID></AppID>
-    <AppURL>#{quickbooks_url(:protocol => 'https://', :action => 'api')}</AppURL>
-    <AppDescription>I like to describe my awesome app</AppDescription>
-    <AppSupport>#{QBWC.support_site_url}</AppSupport>
-    <UserName>#{QBWC.username}</UserName>
+    <AppName>QBWC Multiuser Example</AppName>
+    <AppID>QB</AppID>
+    <AppURL>http://localhostmac/apis/quickbooks/api</AppURL>
+    <AppDescription>Rails-Quickbooks Integration</AppDescription>
+    <AppSupport>http://localhostmac/</AppSupport>
+    <UserName>test</UserName>
     <OwnerID>#{QBWC.owner_id}</OwnerID>
     <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1EB}</FileID>
     <QBType>QBPOS</QBType>
@@ -19,7 +19,7 @@ class QbwcController < ApplicationController
     </Scheduler>
     </QBWCXML>
     QWC
-    send_data qwc, :filename => 'name_me.qwc'
+    send_data qwc, :filename => 'qbwc_mu.qwc'
   end
 
   def api

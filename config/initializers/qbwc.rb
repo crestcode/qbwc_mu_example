@@ -1,11 +1,11 @@
 QBWC.configure do |c|
 
   #Currently Only supported for single logins.
-  c.username = "foo"
-  c.password = "bar"
+  c.username = "test"
+  c.password = "password"
 
   #Path to Company File (blank for open or named path or function etc..)
-  c.company_file_path = ""
+  c.company_file_path = "Computer Name=john-pc;Company Data=john;Version=11"
 
   #Minimum Quickbooks Version Required for use in QBXML Requests
   c.min_version = 7.0
