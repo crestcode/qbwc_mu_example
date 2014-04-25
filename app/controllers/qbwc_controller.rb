@@ -1,5 +1,6 @@
 class QbwcController < ApplicationController
-  require "Quickbooks"
+  require 'Quickbooks'
+  require 'rexml/document'
   protect_from_forgery :except => :api
   def qwc
     qwc = <<-QWC
