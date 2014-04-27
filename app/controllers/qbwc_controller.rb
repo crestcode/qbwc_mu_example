@@ -2,14 +2,15 @@ class QbwcController < ApplicationController
   require 'Quickbooks'
   require 'rexml/document'
   protect_from_forgery :except => :api
+
   def qwc
     qwc = <<-QWC
     <QBWCXML>
     <AppName>QBWC Multiuser Example</AppName>
     <AppID>QB</AppID>
-    <AppURL>http://localhostmac/apis/quickbooks/api</AppURL>
+    <AppURL>http://localhostmac:3000/apis/quickbooks/api</AppURL>
     <AppDescription>Rails-Quickbooks Integration</AppDescription>
-    <AppSupport>http://localhostmac/</AppSupport>
+    <AppSupport>http://localhostmac:3000/</AppSupport>
     <UserName>test</UserName>
     <OwnerID>#{QBWC.owner_id}</OwnerID>
     <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1EB}</FileID>
@@ -32,6 +33,25 @@ class QbwcController < ApplicationController
     if request.get?
       render :nothing => true
       return
+    end
+
+    if params["Envelope"]["Body"].keys.first =="authenticate"
+      QBWC.add_job("test", :import_vendors) do
+        '
+        <?qbposxml version="3.0"?>
+        <QBPOSXML>
+      <QBPOSXMLMsgsRq onError="stopOnError">
+            <ItemInventoryQueryRq>
+          </ItemInventoryQueryRq>
+        </QBPOSXMLMsgsRq>
+        </QBPOSXML>
+      '
+      end
+
+      QBWC.jobs["test"][:import_vendors].set_response_proc do |qbxml|
+        puts "====================Dumping QBXML====================="
+        puts qbxml
+      end
     end
 
     req = request

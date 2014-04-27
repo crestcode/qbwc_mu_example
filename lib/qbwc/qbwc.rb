@@ -48,9 +48,9 @@ module QBWC
 
   class << self
 
-    def add_job(merchant_account_product_feed_configuration_username, name, &block)
-      @@jobs[merchant_account_product_feed_configuration_username] ||= {}
-      @@jobs[merchant_account_product_feed_configuration_username][name] = Job.new(name, &block)
+    def add_job(username, name, &block)
+      @@jobs[username] ||= {}
+      @@jobs[username][name] = Job.new(name, &block)
     end
 
 

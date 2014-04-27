@@ -1,6 +1,6 @@
 QbwcMuExample::Application.routes.draw do
 
-  get 'apis/quickbooks/:action', :controller => 'qbwc', :as => 'quickbooks'
+  match 'apis/quickbooks/:action', :controller => 'qbwc', :as => 'quickbooks', via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

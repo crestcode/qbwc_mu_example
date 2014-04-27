@@ -11,7 +11,7 @@ QBWC.configure do |c|
   c.min_version = 7.0
 
   #Quickbooks Type (either :qb or :qbpos)
-  c.api = :qb
+  c.api = :qbpos
 
   #Quickbooks Support URL provided in QWC File
   c.support_site_url = "localhost:3000"
